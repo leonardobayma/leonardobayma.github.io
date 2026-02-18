@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Minhas desventuras pelas interwebs wowowowowowo</title>
-    <link>https://blog.leonardobayma.com.br/posts/</link>
+    <link>http://localhost:1313/posts/</link>
     <description>Recent content in Posts on Minhas desventuras pelas interwebs wowowowowowo</description>
     <generator>Hugo</generator>
     <language>pt-br</language>
     <lastBuildDate>Mon, 19 Jan 2026 02:42:13 -0300</lastBuildDate>
-    <atom:link href="https://blog.leonardobayma.com.br/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Por Que Um Blog?</title>
-      <link>https://blog.leonardobayma.com.br/por-que-um-blog/</link>
+      <link>http://localhost:1313/por-que-um-blog/</link>
       <pubDate>Mon, 19 Jan 2026 02:42:13 -0300</pubDate>
-      <guid>https://blog.leonardobayma.com.br/por-que-um-blog/</guid>
+      <guid>http://localhost:1313/por-que-um-blog/</guid>
       <description>&lt;p&gt;Eu sempre tive vontade de fazer um blog, mas tinha muita preguiça, porém nos últimos tempos tenho notado a minha incapacidade de lembrar as coisas, seja elas filmes, jogos, coisas que assisti em geral, ou coisas que tentei aprender. Inspirado na ideia de construir um backup do cérebro do Akita pretendo manter um diário de aprendizado ou observações em geral.&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://global.discourse-cdn.com/tnation/uploads/default/original/4X/9/b/2/9b27f8bf6726f8bd1c58664e829adba2515fb885.gif&#34; alt=&#34;Alt Text&#34;&gt;&lt;/p&gt;</description>
     </item>
   </channel>
