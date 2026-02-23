@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<title>Gerenciando Usuários E Permissões No Linux | Minhas desventuras pelas interwebs wowowowowowo</title>
+<meta charset="utf-8">
+<meta name="generator" content="Hugo 0.155.3">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="https://blog.leonardobayma.com.br/css/index.css">
+<link rel="stylesheet" href="https://blog.leonardobayma.com.br/PT-Sans/index.css">
+<link rel="canonical" href="https://blog.leonardobayma.com.br/gerenciando-usuarios-e-permissoes-no-linux/">
+<link rel="alternate" type="application/rss+xml" href="" title="Minhas desventuras pelas interwebs wowowowowowo">
+
+
+<header class="hover">
+  <h1 class=""><a href="https://blog.leonardobayma.com.br/">Minhas desventuras pelas interwebs wowowowowowo</a></h1>
+  
+  
+    
+      
+    
+  
+  
+</header>
+
+<article>
+  <header class="meta">
+    <h1><a href="/gerenciando-usuarios-e-permissoes-no-linux/">Gerenciando Usuários E Permissões No Linux</a></h1>
+    <time datetime="2026-02-22T23:03:45-03:00">February 22, 2026</time>
+  </header>
+  <h2 id="configurando-e-acessando-o-usuário-root">Configurando e acessando o usuário root</h2>
+<h3 id="criando-a-senha-para-o-usuário-root">Criando a senha para o usuário root</h3>
+<p>No processo de instalação do Linux, você configura um super-usuário com privilégios de administrador, mas não é a mesma coisa que o usuário <strong>root</strong>, o usuário root é o administrador do sistema, ele tem permissão para executar qualquer comando. Porém esse usuário por padrão não vem com uma senha definida, o que impossibilita seu acesso.  Para criar uma senha para o usuário root, deve se usar o comando <code>sudo passwd root</code>, o prompt vai pedir a senha do seu usuário e depois você deve colocar a senha desejada para o root e confirmá-la.</p>
+<h3 id="entrar-como-usuário-root">Entrar como usuário root</h3>
+<p>Para fazer o login como root, basta usar o comando <code>su</code>, e colocar a senha que você acabou de definir. Para saber qual usuário você está logado pode usar <code>whoami</code> e o prompt retornará o nome do usuário
+atual.</p>
+<h2 id="gerenciando-usuários">Gerenciando usuários</h2>
+<h3 id="criando-um-usuário">Criando um usuário</h3>
+<p>Para criar um novo usuário, deve-se usar o comando <code>useradd [flags] nome do usuário</code>.</p>
+<table>
+  <thead>
+      <tr>
+          <th>flag</th>
+          <th>Descrição</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-m</td>
+          <td>Cria um diretório para o usuário no /home</td>
+      </tr>
+      <tr>
+          <td>-c</td>
+          <td>Adiciona um comentário para o usuário, útil para escrever o nome para exibição</td>
+      </tr>
+      <tr>
+          <td>-s</td>
+          <td>define a shell padrão do usuário</td>
+      </tr>
+      <tr>
+          <td>-p</td>
+          <td>define uma senha para o usuário, porém a <strong>senha já deve estar criptografada</strong></td>
+      </tr>
+      <tr>
+          <td>-G</td>
+          <td>define os grupos que o usuário fará parte</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="fazendo-o-primeiro-usuário">Fazendo o primeiro usuário</h3>
+<p><code>useradd pedro -c 'Pedro Silva' -m -s /bin/bash</code></p>
+<p>O usuário pedro foi criado com um diretório pessoal, mas nesse comando não foi definida uma senha de acesso, para fazer isso, vamos usar o mesmo comando de antes, mas escolhendo o usuário para definir a senha.</p>
+<p><code>passwd pedro</code></p>
+<p>Depois é só colocar a senha desejada.</p>
+<h4 id="outra-maneira">Outra maneira</h4>
+<p>Também é possível definir uma senha no momento da criação do usuário adicionando a flag <code>-p</code>, porém é preciso fornecer a senha já cripitografada.</p>
+<p><code>passwd pedro -c 'Pedro Silva -m -s /bin/bash -p $(openssl passwd --password &lt;senha&gt;)</code></p>
+<p>Executando o comando<code>passwd pedro -e</code>, a senha definida será expirada, assim quando o usuário realizar o login, sera requisitado a criação de uma nova senha.</p>
+<h3 id="modificando-o-usuário">Modificando o usuário</h3>
+<p>Caso você precise alterar alguma informação do usuário, ou esqueceu de definir algo durante a criação, pode-se usar o comando <code>usermod</code>, usando a flag que você quer modificar</p>
+<p><code>usermod pedro -s /bin/zsh</code></p>
+<h3 id="deletando-um-usuário">Deletando um usuário</h3>
+<p>Para deletar um usuário, deve-se usar o comando <code>userdel</code>, e caso queira apagar todas as suas informações, adicione a flag <code>-r</code>.</p>
+<p><code>userdel -r pedro</code></p>
+<h2 id="gerenciando-grupos-no-linux">Gerenciando grupos no Linux</h2>
+<h3 id="criando-um-grupo">Criando um grupo</h3>
+<p>Para criar um novo grupo deve-se usar o comando <code>groupadd</code></p>
+<p><code>groupadd FINCANCEIRO</code></p>
+<h3 id="modificando-membros-do-grupo">Modificando membros do grupo</h3>
+<p>Para gerenciar um grupo, deve-se usar o comando <code>gpasswd</code></p>
+<h4 id="adicionado-usuário-em-algum-grupo">Adicionado usuário em algum grupo</h4>
+<p><code>gpasswd -a pedro FINANCEIRO</code></p>
+<h4 id="removendo-o-usuário-de-um-grupo">removendo o usuário de um grupo</h4>
+<p><code>gpasswd -d pedro FINANCEIRO</code></p>
+<h3 id="deletando-um-grupo">Deletando um grupo</h3>
+<p><code>groupdel FINANCEIRO</code></p>
+<h2 id="gerenciando-permissões">Gerenciando permissões</h2>
+<h3 id="como-o-linux-lida-com-permissões">Como o Linux lida com permissões</h3>
+<p>O Linux trabalha com três categorias para gerenciar permissões: Dono, grupo e outros, e cada categoria podem ter suas permissões definidas. E exitem três permissões que um arquivo pode ter: Leitura, escrita e execução.</p>
+<h3 id="vendo-as-informações-de-permissão-em-um-arquivo">Vendo as informações de permissão em um arquivo</h3>
+<p>Com o comando <code>ls -l</code>, além de mostrar os arquivos, também é apresentado informações de cada arquivo</p>
+<h4 id="primeira-coluna">Primeira coluna:</h4>
+<p>A primeira coluna mostra o tipo de arquivo e as permissões de cada grupo</p>
+<h5 id="exemplos">Exemplos</h5>
+<p><code>-wrxw-x---</code></p>
+<p>Nesse 1° exemplo é possível saber que se trata de um arquivo que o dono do arquivo tem todas as permissões sobre, o grupo tem permissão de leitura e execução e os outros não tem nenhuma permissão.</p>
+<p><code>drwxrwxrwx</code></p>
+<p>No 2° exemplo é possível saber que se trata de um diretório onde todos os grupos de usuários tem todas as permissões</p>
+<h6 id="dissecando-os-exemplos">Dissecando os exemplos</h6>
+<p>A o primeiro caractere diz o tipo de arquivo</p>
+<table>
+  <thead>
+      <tr>
+          <th>Caractere</th>
+          <th>Tipo</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>-</td>
+          <td>Arquivo</td>
+      </tr>
+      <tr>
+          <td>d</td>
+          <td>Diretório</td>
+      </tr>
+      <tr>
+          <td>l</td>
+          <td>Link</td>
+      </tr>
+  </tbody>
+</table>
+<p>e os três caracteres seguintes mostram as permissões do dono do arquivo, e os três seguintes mostram as permissões do grupo, e as três últimas mostram as permissões dos outros.</p>
+<h4 id="segunda-coluna">Segunda coluna:</h4>
+<p>Mostra somente o número de arquivos da pasta.</p>
+<h4 id="terceira-e-quarta-coluna">Terceira e quarta coluna:</h4>
+<p>Mostra o dono do arquivo, e a quarta mostra o grupo do arquivo.</p>
+<h5 id="quinta-coluna">Quinta coluna</h5>
+<p>Mostra o tamanho do arquivo.</p>
+<h5 id="sexta-coluna">Sexta coluna</h5>
+<p>Mostra a ultima data de modificação do arquivo.</p>
+<h3 id="modificando-o-dono-e-o-grupo-de-um-arquivo">Modificando o dono e o grupo de um arquivo</h3>
+<p>É possível mudar a propriedade de um arquivo através do comando <code>chown</code>.</p>
+<p><code>chown pedro:FINANCEIRO</code></p>
+<h3 id="modificado-as-permissões-de-um-arquivo">Modificado as permissões de um arquivo</h3>
+<p>Para mudar as permissões vamos usar o comando <code>chmod</code>.</p>
+<p><code>chmod 750 &lt;arquivo&gt;</code></p>
+<h4 id="dissecando-o-número">Dissecando o número:</h4>
+<p>cada digito do número representa a permissão de um grupo</p>
+<ul>
+<li>7 &raquo; Dono do arquivo</li>
+<li>5 &raquo; Grupo do arquivo</li>
+<li>0 &raquo; Outros</li>
+</ul>
+<p>Cada permissão tem um valor predefinido, e é possível gerenciar as permissões com a soma desses números.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Permissão</th>
+          <th>Número</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Leitura</td>
+          <td>1</td>
+      </tr>
+      <tr>
+          <td>Escrita</td>
+          <td>2</td>
+      </tr>
+      <tr>
+          <td>Execução</td>
+          <td>4</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>7 ( 1 + 2 + 4) &raquo; Leitura, escrita e execução</li>
+<li>5 (1 + 4) &raquo; Leitura e execução</li>
+<li>0 &raquo; Nenhuma permissão</li>
+</ul>
+<h2 id="observações">Observações</h2>
+<h3 id="usuários-tem-um-grupo-próprio">Usuários tem um grupo próprio</h3>
+<p>Por isso tem arquivos que mostram <code>pedro:pedro</code>, quando se cria um arquivo novo, o padrão é adicionar o arquivo no grupo do usuário.</p>
+<h3 id="como-ver-os-grupos-e-os-usuários-criados">Como ver os grupos e os usuários criados</h3>
+<p>Os usuários e grupos são anotados em um arquivo</p>
+<ul>
+<li>Usuários &raquo; /etc/passwd</li>
+<li>Grupos &raquo; /etc/groups</li>
+</ul>
+<p>Para ver esses arquivos de forma rápida basta usar o comando <code>cat</code></p>
+<p><code>cat /etc/passwd</code></p>
+<p>é possível filtrar o arquivo também quando se está procurando um usuário ou grupo específico:</p>
+<p><code>cat /etc/passwd | grep pedro</code></p>
+<p><code>cat /etc/group | FINANCEIRO</code></p>
+
+</article>
+
+
+<footer class="nowrap"><span></span> <a class="dark" href="/por-que-um-blog/">O porquê de um blog? »</a></footer>
+
+
+</html>

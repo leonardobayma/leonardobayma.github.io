@@ -6,8 +6,15 @@
     <description>Recent content on Minhas desventuras pelas interwebs wowowowowowo</description>
     <generator>Hugo</generator>
     <language>pt-br</language>
-    <lastBuildDate>Mon, 19 Jan 2026 02:42:13 -0300</lastBuildDate>
+    <lastBuildDate>Sun, 22 Feb 2026 23:03:45 -0300</lastBuildDate>
     <atom:link href="https://blog.leonardobayma.com.br/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Gerenciando Usuários E Permissões No Linux</title>
+      <link>https://blog.leonardobayma.com.br/gerenciando-usuarios-e-permissoes-no-linux/</link>
+      <pubDate>Sun, 22 Feb 2026 23:03:45 -0300</pubDate>
+      <guid>https://blog.leonardobayma.com.br/gerenciando-usuarios-e-permissoes-no-linux/</guid>
+      <description>&lt;h2 id=&#34;configurando-e-acessando-o-usuário-root&#34;&gt;Configurando e acessando o usuário root&lt;/h2&gt;&#xA;&lt;h3 id=&#34;criando-a-senha-para-o-usuário-root&#34;&gt;Criando a senha para o usuário root&lt;/h3&gt;&#xA;&lt;p&gt;No processo de instalação do Linux, você configura um super-usuário com privilégios de administrador, mas não é a mesma coisa que o usuário &lt;strong&gt;root&lt;/strong&gt;, o usuário root é o administrador do sistema, ele tem permissão para executar qualquer comando. Porém esse usuário por padrão não vem com uma senha definida, o que impossibilita seu acesso.  Para criar uma senha para o usuário root, deve se usar o comando &lt;code&gt;sudo passwd root&lt;/code&gt;, o prompt vai pedir a senha do seu usuário e depois você deve colocar a senha desejada para o root e confirmá-la.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>O porquê de um blog?</title>
       <link>https://blog.leonardobayma.com.br/por-que-um-blog/</link>
