@@ -1,0 +1,61 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { projetos } from '../data/projects-data';
+---
+<!doctype html>
+<html lang="pt-BR">
+	<head>
+		<BaseHead title={`Projetos | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>Projetos</h1>
+			<ul class="project-list">
+				{projetos.map((p) => (
+					<li class="project-item">
+						<a href={p.href}>
+							<h2>{p.nome}</h2>
+						</a>
+						<p>{p.desc}</p>
+						<p class="stack">{p.stack}</p>
+						<span class="status">{p.status}</span>
+					</li>
+				))}
+			</ul>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.project-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.project-item {
+		padding: 1.5rem 0;
+		border-bottom: 1px solid #ddd;
+	}
+
+	.project-item h2 {
+		margin: 0 0 0.5rem;
+	}
+
+	.stack {
+		font-size: 0.85rem;
+		color: #666;
+	}
+
+	.status {
+		display: inline-block;
+		font-size: 0.75rem;
+		margin-top: 0.25rem;
+		color: #888;
+	}
+</style>
